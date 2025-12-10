@@ -11,7 +11,7 @@ IP = [ 58, 50, 42, 34, 26, 18, 10, 2,
     63, 55, 47, 39, 31, 23, 15, 7]
 
 # Final Permutation 
-IP = [ 40, 8, 48, 16, 56, 24, 64, 32,
+IP_INV = [ 40, 8, 48, 16, 56, 24, 64, 32,
     39, 7, 47, 15, 55, 23, 63, 31,
     38, 6, 46, 14, 54, 22, 62, 30,
     37, 5, 45, 13, 53, 21, 61, 29,
@@ -122,3 +122,17 @@ SBOX = [
         [2,1,14,7,4,10,8,13,15,12,9,0,3,5,6,11],
     ]
 ]
+
+def int_to_bits(value: int, length: int) -> list:
+    return [(value >> (length - 1 - i)) & 1 for i in range(length)]
+
+
+def bits_to_int(bits: list) -> int:
+    result = 0
+    for bit in bits:
+        result = (result << 1) | bit
+    return result
+
+
+def permute(bits: list, table: list) -> list:
+    return [bits[i - 1] for i in table]
